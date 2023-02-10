@@ -1,0 +1,47 @@
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+<script>
+  $("#update-form").submit(function(event) {
+  event.preventDefault();
+  const ugdn = $("#ugdn").val();
+  const name = $("#name").val();
+  const job_title = $("#job_title").val();
+  const department = $("#department").val();
+  const email = $("#email").val();
+  $.ajax({
+    type: "PATCH",
+    url: "/update_employee",
+    data: { ugdn, name, job_title, department, email },
+    success: function() {
+      window.location.href = "/";
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+});
+</script>
+<form action="/update_employee" method="post">
+    <div>
+      <label for="ugdn">UGDN : </label>
+      <input type="hidden" id="ugdn" name="ugdn" value="<%= employee.ugdn %>">
+    </div>
+    <div>
+      <label for="name">Name : </label>
+      <input type="text" id="name" name="name" value="<%= employee.name %>">
+    </div>
+    <div>
+      <label for="job_title">Job Title : </label>
+      <input type="text" id="job_title" name="job_title" value="<%= employee.job_title %>">
+    </div>
+    <div>
+      <label for="department">Department : </label>
+      <input type="text" id="department" name="department" value="<%= employee.department %>">
+    </div>
+    <div>
+      <label for="email">Email : </label>
+      <input type="text" id="email" name="email" value="<%= employee.email %>">
+    </div>
+    <button type="submit">Save Changes</button>
+  </form>
+
+  

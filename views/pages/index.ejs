@@ -1,0 +1,47 @@
+
+<h1>employee </h1>
+
+<button id="add-data-btn">Add Data</button>
+
+<script>
+  document.getElementById("add-data-btn").addEventListener("click", function() {
+    window.location.href = "/create_employee";
+  });
+  
+</script>
+<br>
+<br>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>UGDN</th>
+      <th>Name</th>
+      <th>Job Title</th>
+      <th>Department</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% result.forEach(result => { %>
+      <tr>
+        <td><%= result.ugdn %></td>
+        <td><%= result.name %></td>
+        <td><%= result.job_title %></td>
+        <td><%= result.department %></td>
+        <td><%= result.email %></td>
+        <td>
+          <form action="/edit_employee/<%= result.ugdn %>" method="get">
+            <input type="submit" value="Edit">
+          </form>
+        </td>
+        <td>
+          <form action="/delete" method="post">
+            <input type="hidden" name="ugdn" value="<%= result.ugdn %>">
+            <input type="submit" value="Delete">
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
